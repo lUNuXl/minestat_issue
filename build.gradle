@@ -1,0 +1,55 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+    id 'application'
+    id "com.palantir.docker" version "0.34.0"
+    id "com.palantir.docker-compose" version "0.34.0"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    mainClassName = "com.example.Main"
+}
+
+tasks.withType(AbstractArchiveTask) {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.cloud:google-cloud-compute:1.15.0'
+    implementation 'net.dv8tion:JDA:5.0.0-alpha.20', {
+        exclude module: 'opus-java'
+    }
+    implementation 'ch.qos.logback:logback-classic:1.4.5'
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2-beta1'
+    implementation 'io.github.fragland:MineStat:3.0.2'
+
+    // https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j
+    implementation 'org.slf4j:jcl-over-slf4j:2.0.5'
+
+    // https://mvnrepository.com/artifact/com.neovisionaries/nv-websocket-client
+    implementation 'com.neovisionaries:nv-websocket-client:2.14'
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+    //  implementation 'org.apache.commons:commons-collections4:4.4'
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+    useJUnitPlatform()
+}
