@@ -15,7 +15,7 @@ java {
 }
 
 application {
-    mainClassName = "com.example.Main"
+    mainClassName = "org.example.Main"
 }
 
 tasks.withType(AbstractArchiveTask) {
